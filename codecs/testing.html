@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Typelevel Laika + Helium Theme" />
+  <title>Codec Testing</title>
+  
+  <meta name="author" content="Travis Brown"/>
+  
+  <meta name="author" content="Zach McCoy"/>
+  
+  <meta name="author" content="Darren Gibson"/>
+  
+  
+  <meta name="description" content="Circe docs"/>
+  
+  
+  
+  <link rel="icon" sizes="32x32" type="image/png" href="../images/circe_light_no_border_146x173.png"/>
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700">
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:500">
+  
+  <link rel="stylesheet" type="text/css" href="../helium/site/icofont.min.css" />
+    <link rel="stylesheet" type="text/css" href="../helium/site/laika-helium.css" />
+  <script src="../helium/site/laika-helium.js"></script>
+  
+  
+  <script> /* for avoiding page load transitions */ </script>
+</head>
+
+  <body>
+
+    <header id="top-bar" class="light-default dark-default">
+
+  <div class="row">
+    <a id="nav-icon">
+      <i class="icofont-laika navigationMenu" title="Navigation">&#xefa2;</i>
+    </a>
+    
+    
+  </div>
+
+  <a class="image-link" href="https://github.com/circe/circe"><img src="../images/circe_light_no_border_146x173.png"></a>
+
+  <div class="row links">
+    
+    <a class="icon-link svg-link" href="https://github.com/scala-steward/circe"><span class="github" title="Source Code"><svg class="svg-icon" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+  <g class="svg-shape">
+    <path d="M49.995,1c-27.609,-0 -49.995,22.386 -49.995,50.002c-0,22.09 14.325,40.83 34.194,47.444c2.501,0.458 3.413,-1.086 3.413,-2.412c0,-1.185 -0.043,-4.331 -0.067,-8.503c-13.908,3.021 -16.843,-6.704 -16.843,-6.704c-2.274,-5.773 -5.552,-7.311 -5.552,-7.311c-4.54,-3.103 0.344,-3.042 0.344,-3.042c5.018,0.356 7.658,5.154 7.658,5.154c4.46,7.64 11.704,5.433 14.552,4.156c0.454,-3.232 1.744,-5.436 3.174,-6.685c-11.102,-1.262 -22.775,-5.553 -22.775,-24.713c-0,-5.457 1.949,-9.92 5.147,-13.416c-0.516,-1.265 -2.231,-6.348 0.488,-13.233c0,0 4.199,-1.344 13.751,5.126c3.988,-1.108 8.266,-1.663 12.518,-1.682c4.245,0.019 8.523,0.574 12.517,1.682c9.546,-6.47 13.736,-5.126 13.736,-5.126c2.728,6.885 1.013,11.968 0.497,13.233c3.204,3.496 5.141,7.959 5.141,13.416c0,19.209 -11.691,23.436 -22.83,24.673c1.795,1.544 3.394,4.595 3.394,9.26c0,6.682 -0.061,12.076 -0.061,13.715c0,1.338 0.899,2.894 3.438,2.406c19.853,-6.627 34.166,-25.354 34.166,-47.438c-0,-27.616 -22.389,-50.002 -50.005,-50.002"/>
+  </g>
+</svg></span></a>
+    
+    <a class="icon-link glyph-link" href="https://discord.gg/XF3CXcMzqD"><i class="icofont-laika chat" title="Chat">&#xeed5;</i></a>
+    
+  </div>  
+
+</header>
+    
+    <nav id="sidebar">
+
+  <div class="row">
+    
+    <a class="icon-link svg-link" href="https://github.com/scala-steward/circe"><span class="github" title="Source Code"><svg class="svg-icon" width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+  <g class="svg-shape">
+    <path d="M49.995,1c-27.609,-0 -49.995,22.386 -49.995,50.002c-0,22.09 14.325,40.83 34.194,47.444c2.501,0.458 3.413,-1.086 3.413,-2.412c0,-1.185 -0.043,-4.331 -0.067,-8.503c-13.908,3.021 -16.843,-6.704 -16.843,-6.704c-2.274,-5.773 -5.552,-7.311 -5.552,-7.311c-4.54,-3.103 0.344,-3.042 0.344,-3.042c5.018,0.356 7.658,5.154 7.658,5.154c4.46,7.64 11.704,5.433 14.552,4.156c0.454,-3.232 1.744,-5.436 3.174,-6.685c-11.102,-1.262 -22.775,-5.553 -22.775,-24.713c-0,-5.457 1.949,-9.92 5.147,-13.416c-0.516,-1.265 -2.231,-6.348 0.488,-13.233c0,0 4.199,-1.344 13.751,5.126c3.988,-1.108 8.266,-1.663 12.518,-1.682c4.245,0.019 8.523,0.574 12.517,1.682c9.546,-6.47 13.736,-5.126 13.736,-5.126c2.728,6.885 1.013,11.968 0.497,13.233c3.204,3.496 5.141,7.959 5.141,13.416c0,19.209 -11.691,23.436 -22.83,24.673c1.795,1.544 3.394,4.595 3.394,9.26c0,6.682 -0.061,12.076 -0.061,13.715c0,1.338 0.899,2.894 3.438,2.406c19.853,-6.627 34.166,-25.354 34.166,-47.438c-0,-27.616 -22.389,-50.002 -50.005,-50.002"/>
+  </g>
+</svg></span></a>
+    
+    <a class="icon-link glyph-link" href="https://discord.gg/XF3CXcMzqD"><i class="icofont-laika chat" title="Chat">&#xeed5;</i></a>
+    
+  </div>
+
+  <ul class="nav-list">
+    <li class="level1 nav-leaf"><a href="../quickstart.html">Quick Start</a></li>
+    <li class="level1 nav-leaf"><a href="../parsing.html">Parsing JSON</a></li>
+    <li class="level1 nav-leaf"><a href="../cursors.html">Traversing and modifying JSON</a></li>
+    <li class="level1 nav-node"><a href="index.html">Encoding and Decoding</a></li>
+    <li class="level2 nav-leaf"><a href="semiauto-derivation.html">Semi-automatic Derivation</a></li>
+    <li class="level2 nav-leaf"><a href="auto-derivation.html">Automatic Derivation</a></li>
+    <li class="level2 nav-leaf"><a href="custom-codecs.html">Custom Codecs</a></li>
+    <li class="level2 nav-leaf"><a href="adt.html">ADT (Algebraic Data Types)</a></li>
+    <li class="level2 active nav-leaf"><a href="#">Codec Testing</a></li>
+    <li class="level2 nav-leaf"><a href="known-issues.html">Warnings and known issues</a></li>
+    <li class="level1 nav-leaf"><a href="../optics.html">Optics</a></li>
+    <li class="level1 nav-leaf"><a href="../performance.html">Performance</a></li>
+    <li class="level1 nav-header">Related Projects</li>
+    <li class="level2 nav-leaf"><a href="https://github.com/circe/circe-fs2">circe-fs2</a></li>
+    <li class="level2 nav-leaf"><a href="https://github.com/circe/circe-iteratee">circe-iteratee</a></li>
+    <li class="level2 nav-leaf"><a href="https://github.com/circe/circe-generic-extras">circe-generic-extras</a></li>
+    <li class="level2 nav-leaf"><a href="https://github.com/circe/circe-derivation">circe-derivation</a></li>
+    <li class="level2 nav-leaf"><a href="https://github.com/circe/circe-optics">circe-optics</a></li>
+    <li class="level2 nav-leaf"><a href="https://github.com/circe/circe-droste">circe-droste</a></li>
+    <li class="level2 nav-leaf"><a href="https://github.com/circe/circe-spire">circe-spire</a></li>
+    <li class="level2 nav-leaf"><a href="https://github.com/circe/circe-config">circe-config</a></li>
+    <li class="level2 nav-leaf"><a href="https://github.com/circe/circe-yaml">circe-yaml</a></li>
+    <li class="level2 nav-leaf"><a href="https://github.com/circe/circe-bson">circe-bson</a></li>
+    <li class="level2 nav-leaf"><a href="https://github.com/circe/circe-schema">circe-schema</a></li>
+    <li class="level2 nav-leaf"><a href="https://github.com/circe/circe-golden">circe-golden</a></li>
+    <li class="level2 nav-leaf"><a href="https://github.com/circe/circe-json-schema">circe-json-schema</a></li>
+    <li class="level2 nav-leaf"><a href="https://github.com/circe/circe-jackson">circe-jackson</a></li>
+    <li class="level2 nav-leaf"><a href="https://github.com/circe/circe-argus">circe-argus</a></li>
+  </ul>
+
+</nav>
+
+    <div id="container">
+
+      
+<nav id="page-nav">
+  <p class="header"><a href="#">Codec Testing</a></p>
+
+  <ul class="nav-list">
+    <li class="level1 nav-leaf"><a href="#codec-laws"><code>Codec</code> laws</a></li>
+  </ul>
+
+  <p class="footer"></p>
+</nav>
+
+
+      <main class="content">
+
+        <h1 id="codec-testing" class="title">Codec Testing</h1>
+        <p>Suppose you have the following <code>Person</code> case class and hand-written encoders and decoders. In this
+        case, your decoder includes a typo, <code>&quot;mame&quot;</code> instead of <code>&quot;name&quot;</code>.</p>
+        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="keyword">import</span><span> </span><span class="identifier">io</span><span>.</span><span class="identifier">circe</span><span>.</span><span class="identifier">_</span><span>
+</span><span class="keyword">import</span><span> </span><span class="identifier">io</span><span>.</span><span class="identifier">circe</span><span>.</span><span class="identifier">syntax</span><span>.</span><span class="identifier">_</span><span>
+
+</span><span class="keyword">case</span><span> </span><span class="keyword">class</span><span> </span><span class="type-name">Person</span><span>(</span><span class="identifier">name</span><span>: </span><span class="type-name">String</span><span>)
+</span><span class="keyword">object</span><span> </span><span class="type-name">Person</span><span> {
+  </span><span class="keyword">implicit</span><span> </span><span class="keyword">val</span><span> </span><span class="identifier">encPerson</span><span>: </span><span class="type-name">Encoder</span><span>[</span><span class="type-name">Person</span><span>] = </span><span class="type-name">Encoder</span><span>.</span><span class="identifier">forProduct1</span><span>(</span><span class="string-literal">&quot;name&quot;</span><span>)(</span><span class="identifier">_</span><span>.</span><span class="identifier">name</span><span>)
+  </span><span class="keyword">implicit</span><span> </span><span class="keyword">val</span><span> </span><span class="identifier">decPerson</span><span>: </span><span class="type-name">Decoder</span><span>[</span><span class="type-name">Person</span><span>] = </span><span class="type-name">Decoder</span><span>.</span><span class="identifier">forProduct1</span><span>(</span><span class="string-literal">&quot;mame&quot;</span><span>)(</span><span class="type-name">Person</span><span>.</span><span class="identifier">apply</span><span> </span><span class="identifier">_</span><span>)
+}</span></code></pre>
+        <p>If you try to encode then decode a <code>Person</code>, you won&#39;t be successful:</p>
+        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="type-name">Person</span><span>(</span><span class="string-literal">&quot;James&quot;</span><span>).</span><span class="identifier">asJson</span><span>.</span><span class="identifier">as</span><span>[</span><span class="type-name">Person</span><span>]
+</span><span class="comment">// res0: Decoder.Result[Person] = Left(
+//   value = DecodingFailure at .mame: Missing required field
+// )</span></code></pre>
+        <p>This process is an example of a round trip. We can think about this round trip at two
+        different levels. Thinking about it for the particular case class <code>Person</code>, we can say
+        that any <code>Person</code> should round trip. This is a property we expect about the <code>Person</code>
+        case class.</p>
+        <p>However, this is a common expectation for anything that has both an <code>Encoder</code> and <code>Decoder</code>.
+        In that sense, round tripping is a property we expect about anything with a <code>Codec</code>. When
+        we have expectations about all things that implement some typeclass, we have a <em>law</em>.</p>
+        
+        <h3 id="codec-laws" class="section"><a class="anchor-link left" href="#codec-laws"><i class="icofont-laika link">&#xef71;</i></a><code>Codec</code> laws</h3>
+        <p>To check <code>Codec</code> laws for your custom types, they&#39;ll need two implicits in scope -- <code>Arbitrary</code> and
+        <code>Eq</code>.</p>
+        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="keyword">import</span><span> </span><span class="identifier">cats</span><span>.</span><span class="type-name">Eq</span><span>
+</span><span class="keyword">import</span><span> </span><span class="identifier">io</span><span>.</span><span class="identifier">circe</span><span>.</span><span class="identifier">testing</span><span>.</span><span class="type-name">ArbitraryInstances</span><span>
+</span><span class="keyword">import</span><span> </span><span class="identifier">org</span><span>.</span><span class="identifier">scalacheck</span><span>.{</span><span class="type-name">Arbitrary</span><span>, </span><span class="type-name">Gen</span><span>}
+
+</span><span class="keyword">object</span><span> </span><span class="type-name">Implicits</span><span> </span><span class="keyword">extends</span><span> </span><span class="type-name">ArbitraryInstances</span><span> {
+  </span><span class="keyword">implicit</span><span> </span><span class="keyword">val</span><span> </span><span class="identifier">eqPerson</span><span>: </span><span class="type-name">Eq</span><span>[</span><span class="type-name">Person</span><span>] = </span><span class="type-name">Eq</span><span>.</span><span class="identifier">fromUniversalEquals</span><span>
+  </span><span class="keyword">implicit</span><span> </span><span class="keyword">val</span><span> </span><span class="identifier">arbPerson</span><span>: </span><span class="type-name">Arbitrary</span><span>[</span><span class="type-name">Person</span><span>] = </span><span class="type-name">Arbitrary</span><span> {
+    </span><span class="type-name">Gen</span><span>.</span><span class="identifier">listOf</span><span>(</span><span class="type-name">Gen</span><span>.</span><span class="identifier">alphaChar</span><span>) </span><span class="identifier">map</span><span> { </span><span class="identifier">chars</span><span> =&gt; </span><span class="type-name">Person</span><span>(</span><span class="identifier">chars</span><span>.</span><span class="identifier">mkString</span><span>(</span><span class="string-literal">&quot;&quot;</span><span>)) }
+  }
+}</span></code></pre>
+        <p>The presence of those implicit values and an import from the <code>circe-testing</code> module
+        will allow you to create a <code>CodecTests[Person]</code>:</p>
+        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="keyword">import</span><span> </span><span class="identifier">io</span><span>.</span><span class="identifier">circe</span><span>.</span><span class="identifier">testing</span><span>.</span><span class="type-name">CodecTests</span><span>
+
+</span><span class="keyword">val</span><span> </span><span class="identifier">personCodecTests</span><span> = </span><span class="type-name">CodecTests</span><span>[</span><span class="type-name">Person</span><span>]
+</span><span class="comment">// personCodecTests: CodecTests[Person] = io.circe.testing.CodecTests$$anon$2@4f34ea0f</span></code></pre>
+        <p><code>CodecTests[T]</code> expose two <a href="https://typelevel.org/blog/2013/11/17/discipline.html#interface">&quot;rule sets&quot;</a>
+        that can be used with <a href="https://github.com/typelevel/discipline"><code>Discipline</code></a>. The less restrictive set
+        is <code>unserializableCodec</code>.</p>
+        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="keyword">import</span><span> </span><span class="type-name">Implicits</span><span>.</span><span class="identifier">_</span><span>
+</span><span class="identifier">personCodecTests</span><span>.</span><span class="identifier">unserializableCodec</span><span>
+</span><span class="comment">// res1: personCodecTests.RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@6d3721dd</span></code></pre>
+        <p>It checks whether the <code>Codec</code> for your type successfully round trips through json serialization and
+        deserialization and whether your decoder satisfies consistent error accumulation.</p>
+        <p>The more restrictive set is <code>codec</code>:</p>
+        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="identifier">personCodecTests</span><span>.</span><span class="identifier">codec</span><span>
+</span><span class="comment">// res2: personCodecTests.RuleSet = org.typelevel.discipline.Laws$DefaultRuleSet@71466bb3</span></code></pre>
+        <p>It checks the laws from <code>unserializableCodec</code> and ensures that your encoder and decoder can be serialized
+        to and from Java byte array streams. It is generally a good idea to use the stronger laws from <code>.codec</code>, and
+        you definitely should use them if you&#39;re in a setting where the JVM has to ship a lot of data around, for
+        example in a Spark application. However, if you&#39;re not in a distributed setting and the serializability laws
+        are getting in your way, it&#39;s fine to skip them with the <code>unserializableCodec</code>.</p>
+
+        
+<hr class="footer-rule"/>
+<footer>
+  Site generated by <a href="https://typelevel.org/Laika/">Laika</a> with the Helium theme.
+</footer>
+
+
+      </main>
+
+    </div>
+
+  </body>
+
+</html>
